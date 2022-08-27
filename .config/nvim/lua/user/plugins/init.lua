@@ -20,8 +20,8 @@ local function wrap_local(spec)
   end
 
   local local_path = spec.local_path
-      or vim.env.PACKER_LOCAL_PATH
-      or (vim.env.HOME .. "/Documents/dev/nvim/plugins")
+    or vim.env.PACKER_LOCAL_PATH
+    or (vim.env.HOME .. "/Documents/dev/nvim/plugins")
   local path = local_path .. "/" .. name
   if vim.fn.isdirectory(path) == 0 then
     path = spec[1]
@@ -42,7 +42,7 @@ end
 
 return require("packer").startup({
   ---@diagnostic disable-next-line: unused-local
-  function(use, use_rocks)
+  function (use, use_rocks)
 
     -- vim.g.did_load_filetypes = 1
     -- vim.g.loaded_netrwPlugin = 1
@@ -123,14 +123,14 @@ return require("packer").startup({
       "ray-x/lsp_signature.nvim",
       config = function()
         require("lsp_signature").setup({
-          hint_enable = false,
-          hint_prefix = "● ",
-          max_width = 80,
-          max_height = 12,
-          handler_opts = {
-            border = "single"
-          }
-        })
+            hint_enable = false,
+            hint_prefix = "● ",
+            max_width = 80,
+            max_height = 12,
+            handler_opts = {
+              border = "single"
+            }
+          })
       end
     }
     use { "mfussenegger/nvim-jdtls" }
@@ -209,28 +209,7 @@ return require("packer").startup({
     use { "godlygeek/tabular" }
     use { "tpope/vim-surround" }
     use { "tweekmonster/startuptime.vim", cmd = { "StartupTime" } }
-    use {
-      "RRethy/vim-illuminate",
-      setup = function()
-        vim.g.Illuminate_delay = 250
-        vim.g.Illuminate_highlightUnderCursor = 1
-        vim.g.Illuminate_ftblacklist = {
-          "qf",
-          "dashboard",
-          "alpha",
-          "packer",
-          "NeogitStatus",
-          "TelescopePrompt",
-          "NvimTree",
-          "Trouble",
-          "DiffviewFiles",
-          "DiffviewFileHistory",
-          "Outline",
-          "lir",
-          "fugitive",
-        }
-      end
-    }
+    use { "RRethy/vim-illuminate", config = conf("vim-illuminate") }
     use { "troydm/zoomwintab.vim" }
     use {
       "rcarriga/nvim-notify",
@@ -274,14 +253,17 @@ return require("packer").startup({
     use {
       "akinsho/git-conflict.nvim",
       config = function()
-        require("git-conflict").setup({
-          default_mappings = true, -- disable buffer local mapping created by this plugin
-          disable_diagnostics = true, -- This will disable the diagnostics in a buffer whilst it is conflicted
-          highlights = { -- They must have background color, otherwise the default color will be used
+        local ok, git_conflict = pcall(require, "git-conflict")
+        if ok then
+          git_conflict.setup({
+            default_mappings = true, -- disable buffer local mapping created by this plugin
+            disable_diagnostics = true, -- This will disable the diagnostics in a buffer whilst it is conflicted
+            highlights = { -- They must have background color, otherwise the default color will be used
             incoming = "DiffChange",
             current = "DiffAdd",
           },
         })
+        end
       end
     }
     use { "goolord/alpha-nvim", config = conf("alpha") }
@@ -312,7 +294,7 @@ return require("packer").startup({
       run = function() vim.fn["firenvim#install"](0) end,
       setup = conf("firenvim"),
     }
-    use { 'honza/vim-snippets' }
+    use { "honza/vim-snippets" }
     use {
       "vim-test/vim-test",
       setup = function()
@@ -363,6 +345,7 @@ return require("packer").startup({
     use_local { "sindrets/dracula-vim", as = "dracula" }
     use { "projekt0n/github-nvim-theme" }
     use { "rebelot/kanagawa.nvim" }
+    use_local { "sindrets/oxocarbon-lua.nvim" }
   end,
 
   config = {

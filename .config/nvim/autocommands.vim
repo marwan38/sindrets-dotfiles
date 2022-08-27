@@ -26,7 +26,7 @@ augroup NvimConfig
     " Disable modelines after the first time it's processed.
     au BufWinEnter * setl nomodeline
 
-    au TermEnter,TermOpen * setl nonu nornu signcolumn=yes:1 | IlluminationDisable!
+    au TermEnter,TermOpen * setl nonu nornu signcolumn=yes:1 | IlluminatePauseBuf
     au TermOpen * let b:term_start = v:lua.vim.loop.hrtime()
 
     " Automatically close interactive term buffers if exit status is 0. Don't
@@ -69,4 +69,7 @@ augroup NvimConfig
                 \ |         setl nodiff nocursorbind noscrollbind
                 \ |     endif
                 \ | endif
+
+    " Execute command from cmdline window while keeping it open.
+    au CmdwinEnter * nnoremap <buffer> <C-x> <CR>q:
 augroup END
