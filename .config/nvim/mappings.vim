@@ -258,8 +258,8 @@ nnoremap <silent> <leader>ld <Cmd>lua vim.diagnostic.open_float({ scope = "line"
 
 " Misc: {{{
 
-xnoremap @ :<C-u>lua require'user.lib'.execute_macro_over_visual_range()<CR>
-inoremap <silent> <Tab> <Cmd>lua require'user.lib'.full_indent()<CR>
+xnoremap @ :<C-u>lua Config.lib.execute_macro_over_visual_range()<CR>
+inoremap <Tab> <Cmd>lua Config.lib.full_indent()<CR>
 inoremap <M-Space> <Esc>
 
 " Change mapping for digraphs
@@ -270,6 +270,13 @@ inoremap <M-Return> <Esc>O
 
 " Search for selected text
 vnoremap * "vy/\V<C-R>=escape(@",'/\')<CR><CR>
+
+" Change the current word (dot-repeatable for all matches of <cword>)
+nnoremap cn *``cgn
+
+" Change the current selection (dot-repeatable for all macthes of the
+" selection)
+vnoremap cn "vy/\V<C-R>=escape(@",'/\')<CR><CR>``cgn
 
 " Start search with very-magic mode
 nnoremap / /\v
