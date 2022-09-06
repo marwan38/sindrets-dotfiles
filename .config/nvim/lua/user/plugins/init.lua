@@ -146,12 +146,9 @@ return require("packer").startup({
       after = "nvim-autopairs",
       config = conf("nvim-cmp"),
     }
-    use {
-      "jose-elias-alvarez/typescript.nvim"
-    }
-    use {
-      "jose-elias-alvarez/null-ls.nvim"
-    }
+    use { "jose-elias-alvarez/typescript.nvim" }
+    use { "jose-elias-alvarez/null-ls.nvim" }
+    use { "simrat39/rust-tools.nvim", config = conf("rust-tools") }
     use_local {
       "tamago324/lir.nvim",
       requires = { wrap_local("tamago324/lir-git-status.nvim") },
