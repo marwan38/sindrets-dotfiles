@@ -82,7 +82,7 @@ function M.create_config(...)
 end
 
 -- Java
-require("user.lsp.java")
+-- require("user.lsp.java")
 
 -- Typescript
 require("typescript").setup({
@@ -97,7 +97,7 @@ require("typescript").setup({
 require("user.lsp.null-ls")
 
 -- Python
-lspconfig.pyright.setup(M.create_config())
+-- lspconfig.pyright.setup(M.create_config())
 
 -- Lua
 require("user.lsp.lua")
@@ -121,19 +121,22 @@ lspconfig.omnisharp.setup(M.create_config({
 require'lspconfig'.eslint.setup(M.create_config())
 
 -- C, C++
-lspconfig.clangd.setup(M.create_config())
+-- lspconfig.clangd.setup(M.create_config())
 
 -- Vim
-lspconfig.vimls.setup(M.create_config())
+-- lspconfig.vimls.setup(M.create_config())
 
 -- Go
-lspconfig.gopls.setup(M.create_config())
+-- lspconfig.gopls.setup(M.create_config())
 
 -- Scheme, Racket
-lspconfig.racket_langserver.setup(M.create_config())
+-- lspconfig.racket_langserver.setup(M.create_config())
 
 -- PHP
 lspconfig.intelephense.setup(M.create_config())
+
+-- JSON
+require("user.lsp.json")
 
 vim.lsp.handlers["textDocument/publishDiagnostics"] = vim.lsp.with(
   vim.lsp.diagnostic.on_publish_diagnostics, {

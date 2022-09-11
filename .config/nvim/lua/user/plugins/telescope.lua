@@ -56,6 +56,8 @@ return function ()
           ["<c-b>"] = actions.preview_scrolling_up,
           ["<c-f>"] = actions.preview_scrolling_down,
           ["<c-j>"] = false,
+          ["<c-p>"] = actions.cycle_history_prev,
+          ["<c-n>"] = actions.cycle_history_next,
         },
         n = {
           ["<c-b>"] = actions.preview_scrolling_up,

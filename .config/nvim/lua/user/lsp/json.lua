@@ -38,19 +38,22 @@ local schemas = {
     fileMatch = { ".stylelintrc", ".stylelintrc.json", "stylelint.config.json" },
     url = "http://json.schemastore.org/stylelintrc",
   },
+  {
+    description = "SWC cibfug",
+    fileMatch = { ".swcrc" },
+    url = "http://json.schemastore.org/swcrc",
+  },
 }
 
-return function()
-  local lspconfig = require("lspconfig")
+local lspconfig = require("lspconfig")
 
-  lspconfig.jsonls.setup(Config.lsp.create_config({
-    settings = {
-      json = {
-        schemas = schemas,
-      },
+lspconfig.jsonls.setup(Config.lsp.create_config({
+  settings = {
+    json = {
+      schemas = schemas,
     },
-    init_options = {
-      provideFormatter = true
-    }
-  }))
-end
+  },
+  init_options = {
+    provideFormatter = true
+  }
+}))

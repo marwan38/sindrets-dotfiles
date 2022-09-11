@@ -1,6 +1,6 @@
 return function()
-  local config = Config.lsp.create_config()
   local rt = require("rust-tools")
+  local config = require("user.lsp").create_config()
 
   rt.setup({
     server = {

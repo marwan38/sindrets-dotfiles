@@ -6,6 +6,7 @@ return function ()
     disable_hint = true,
     disable_context_highlighting = false,
     disable_builtin_notifications = true,
+    auto_refresh = false,
     status = {
       recent_commit_count = 10,
     },
