@@ -1,7 +1,10 @@
 ---Define the default colorscheme.
 ---
 ---Format is `"{name} [bg]"`, where `{name}` is the name of the colorscheme,
----and `[bg]` is the optionally defined value for 'background'.
+---and `[bg]` is the optionally defined value for 'background'. `{name}` may
+---also be replaced with one of the special values "default_dark" or
+---"default_light" which will apply a predefined default dark or light color
+---scheme.
 ---
 ---Override the default colorscheme by defining the environment variable
 ---`NVIM_COLORSCHEME` using the same format.
@@ -13,6 +16,9 @@ local hl = Config.common.hl
 local hi, hi_link, hi_clear = hl.hi, hl.hi_link, hl.hi_clear
 
 local M = {}
+
+M.DEFAULT_DARK = "oxocarbon-lua"
+M.DEFAULT_LIGHT = "seoulbones"
 
 do
   local name, bg
@@ -29,6 +35,14 @@ do
   ---Configured value for 'background'.
   ---@type string?
   M.bg = bg
+
+  if name == "default_dark" then
+    M.name = M.DEFAULT_DARK
+    M.bg = "dark"
+  elseif name == "default_light" then
+    M.name = M.DEFAULT_LIGHT
+    M.bg = "light"
+  end
 end
 
 function M.supports_sp_underline()
@@ -288,14 +302,14 @@ function M.apply_tweaks()
   local colors_name = vim.g.colors_name or ""
   local bg = vim.o.bg
   local bg_normal = Color.from_hl("Normal", "bg")
-    or Color.from_hex(bg == "dark" and "#111111" or "#eeeeee")
-  ---@diagnostic disable-next-line: unused-local
+      or Color.from_hex(bg == "dark" and "#111111" or "#eeeeee")
   local fg_normal = Color.from_hl("Normal", "fg") --[[@as Color ]]
 
   hi_clear({ "Cursor", "TermCursor" })
   hi("TermCursor", { style = "reverse" })
   hi("NonText", { style = "nocombine" })
   hi("Hidden", { fg = "bg", bg = "bg" })
+  hi("CursorLine", { sp = fg_normal:to_css() })
 
   -- Explicitly redefine Normal to circumvent bug in upstream 0.7.0.
   -- TODO: Remove once 0.8.0 becomes stable.
@@ -540,6 +554,7 @@ function M.apply_tweaks()
       })
       hi("StatusLine", { fg = hl.get_fg("String") })
       hi_link("NormalFloat", "Normal")
+      hi_link("TSMath", "Function")
 
       vim.g.terminal_color_0 = "#E2E2E2"
       vim.g.terminal_color_8 = "#BFBABB"
@@ -608,6 +623,7 @@ function M.apply_tweaks()
       })
       hi({ "markdown_inlineTSLiteral", "TSLiteral" }, { fg = hl.get_fg("WinSeparator") })
       hi_link("DiffviewFilePanelConflicts", "String")
+      hi_link("TSMath", "Function")
     end
 
     feline_theme = "basic"
@@ -620,11 +636,12 @@ function M.apply_tweaks()
 
   -- Treesitter
   hi("TSEmphasis", { style = "italic" })
+  hi("TreesitterContext", { bg = bg_normal:clone():highlight(0.08):to_css() })
   hi_link("@neorg.markup.verbatim", "@text.literal")
 
   hi("@neorg.tags.ranged_verbatim.code_block", {
     bg = bg_normal:clone()
-      :mod_value(bg_normal.lightness >= 0.5 and -0.05 or -0.03)
+      :mod_value(-0.03)
       :to_css(),
   })
 
