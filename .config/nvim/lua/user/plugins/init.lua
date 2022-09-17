@@ -147,6 +147,9 @@ return require("packer").startup({
       end
     }
     use { "mfussenegger/nvim-jdtls" }
+    use { "mfussenegger/nvim-dap", config = conf "dap" }
+    use { "rcarriga/nvim-dap-ui", requires = "nvim-dap" }
+
     use {
       "hrsh7th/nvim-cmp",
       requires = {
