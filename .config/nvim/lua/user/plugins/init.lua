@@ -138,6 +138,10 @@ return require("packer").startup({
           })
       end
     }
+    use {
+      "anuvyklack/pretty-fold.nvim",
+      config = conf("pretty-fold"),
+    }
     use { "mfussenegger/nvim-jdtls" }
     use { "mfussenegger/nvim-dap", config = conf "dap" }
     use { "rcarriga/nvim-dap-ui", requires = "nvim-dap" }
@@ -199,7 +203,7 @@ return require("packer").startup({
     use { "nvim-telescope/telescope-fzf-native.nvim", run = "make" }
     use { "nvim-telescope/telescope-media-files.nvim" }
     use { "nvim-telescope/telescope-ui-select.nvim" }
-    use { "akinsho/nvim-bufferline.lua", config = conf("nvim-bufferline"), after = "nvim-web-devicons" }
+    use { "akinsho/bufferline.nvim", config = conf("bufferline"), after = "nvim-web-devicons" }
     use {
       "karb94/neoscroll.nvim",
       config = conf("neoscroll"),
