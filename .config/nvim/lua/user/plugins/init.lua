@@ -1,7 +1,11 @@
 vim.cmd("packadd packer.nvim")
 
 local function conf(config_name)
-  return require(string.format("user.plugins.%s", config_name))
+  local config = string.format("user.plugins.%s", config_name)
+  local ok, _ = pcall(require, config)
+  if ok then
+    return require(config)
+  end
 end
 
 local function wrap_local(spec)
@@ -20,8 +24,8 @@ local function wrap_local(spec)
   end
 
   local local_path = spec.local_path
-    or vim.env.PACKER_LOCAL_PATH
-    or (vim.env.HOME .. "/Documents/dev/nvim/plugins")
+      or vim.env.PACKER_LOCAL_PATH
+      or (vim.env.HOME .. "/Documents/dev/nvim/plugins")
   local path = local_path .. "/" .. name
   if vim.fn.isdirectory(path) == 0 then
     path = spec[1]
@@ -42,7 +46,7 @@ end
 
 return require("packer").startup({
   ---@diagnostic disable-next-line: unused-local
-  function (use, use_rocks)
+  function(use, use_rocks)
 
     -- vim.g.did_load_filetypes = 1
     -- vim.g.loaded_netrwPlugin = 1
@@ -122,20 +126,20 @@ return require("packer").startup({
     use { "neovim/nvim-lspconfig" }
     use {
       "jose-elias-alvarez/null-ls.nvim",
-      config = conf("null-ls"),
+      config = conf("null-ls")
     }
     use {
       "ray-x/lsp_signature.nvim",
       config = function()
         require("lsp_signature").setup({
-            hint_enable = false,
-            hint_prefix = "● ",
-            max_width = 80,
-            max_height = 12,
-            handler_opts = {
-              border = "single"
-            }
-          })
+          hint_enable = false,
+          hint_prefix = "● ",
+          max_width = 80,
+          max_height = 12,
+          handler_opts = {
+            border = "single"
+          }
+        })
       end
     }
     use {
@@ -161,7 +165,6 @@ return require("packer").startup({
       config = conf("nvim-cmp"),
     }
     use { "jose-elias-alvarez/typescript.nvim" }
-    use { "jose-elias-alvarez/null-ls.nvim" }
     use { "simrat39/rust-tools.nvim", config = conf("rust-tools") }
     use_local {
       "tamago324/lir.nvim",
@@ -194,7 +197,7 @@ return require("packer").startup({
     use { "hrsh7th/vim-vsnip-integ" }
     use {
       "scrooloose/nerdcommenter",
-      setup = function ()
+      setup = function()
         vim.g.NERDSpaceDelims = 1
         vim.g.NERDDefaultAlign = "left"
       end
@@ -211,12 +214,12 @@ return require("packer").startup({
     }
     use {
       "mattn/emmet-vim",
-      setup = function ()
+      setup = function()
         vim.g.user_emmet_leader_key = "<C-Z>"
       end,
     }
     use { "tpope/vim-abolish" }
-    use { "alvan/vim-closetag", setup = function ()
+    use { "alvan/vim-closetag", setup = function()
       vim.g.closetag_filenames = "*.html,*.xhtml,*.phtml,*.xml,*.md"
       vim.g.closetag_filetypes = "html,xhtml,phtml,xml,markdown"
     end }
@@ -265,7 +268,7 @@ return require("packer").startup({
       config = conf("nvim-ts-rainbow")
     }
     use_local {
-      "sindrets/vim-fugitive",
+      "tpope/vim-fugitive",
       requires = { "tpope/vim-rhubarb" },
       config = conf("fugitive"),
     }
@@ -291,7 +294,7 @@ return require("packer").startup({
       "iamcco/markdown-preview.nvim",
       run = "cd app && yarn install",
       ft = { "markdown" },
-      setup = function ()
+      setup = function()
         vim.api.nvim_exec([[
           function! MkdpOpenInNewWindow(url)
             if executable("qutebrowser")
@@ -349,6 +352,5 @@ return require("packer").startup({
     display = {
       open_cmd = "vnew \\[packer\\] | wincmd L | vert resize 70",
     },
-    max_jobs = 50
   },
 })

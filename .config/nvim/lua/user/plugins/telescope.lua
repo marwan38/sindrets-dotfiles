@@ -33,7 +33,7 @@ return function ()
         },
       },
       path_display = {
-        "absolute"
+        shorten = 5
       },
       file_sorter =  require'telescope.sorters'.get_fuzzy_file,
       file_ignore_patterns = {},

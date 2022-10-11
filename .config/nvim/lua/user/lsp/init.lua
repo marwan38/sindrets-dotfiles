@@ -95,9 +95,6 @@ require("typescript").setup({
     },
 })
 
--- null-ls
-require("user.lsp.null-ls")
-
 -- Python
 -- lspconfig.pyright.setup(M.create_config())
 
