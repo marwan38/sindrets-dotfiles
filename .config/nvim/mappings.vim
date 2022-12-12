@@ -279,6 +279,7 @@ nnoremap <C-s> <C-i>zz
 
 " LSP
 nmap <silent> gd <Cmd>lua vim.lsp.buf.definition()<CR>
+nmap <silent> gD <Cmd>lua vim.lsp.buf.declaration()<CR>
 nmap <silent> gV <C-W>v<Cmd>lua vim.lsp.buf.definition()<CR>
 nmap <silent> gs <C-W>s<Cmd>lua vim.lsp.buf.definition()<CR>
 nmap <silent> gy <Cmd>lua vim.lsp.buf.type_definition()<CR>

@@ -4,7 +4,7 @@ return function()
 
   rt.setup({
     server = {
-      on_attach = config.on_attach
+      on_attach = config.on_attach,
     }
   })
 end

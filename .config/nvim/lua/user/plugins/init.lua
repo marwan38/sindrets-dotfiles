@@ -263,8 +263,8 @@ return require("packer").startup({
     use { 'ThePrimeagen/git-worktree.nvim', config = conf("git-worktree"), disable = true }
     use {
       "simrat39/symbols-outline.nvim",
-      setup = conf("symbols-outline"),
-      cmd = { "SymbolsOutline", "SymbolsOutlineClose", "SymbolsOutlineOpen" },
+      config = conf("symbols-outline"),
+      cmd = { "SymbolsOutline", "SymbolsOutlineClose", "SymbolsOutlineOpen" }
     }
     use {
       "p00f/nvim-ts-rainbow",
@@ -327,6 +327,7 @@ return require("packer").startup({
       after = { "nvim-treesitter", "telescope.nvim" },
       requires = { "nvim-lua/plenary.nvim", "nvim-neorg/neorg-telescope" },
       cond = vim.fn.has("nvim-0.8"),
+      disable = true
     }
 
     -- THEMES

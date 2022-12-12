@@ -8,7 +8,7 @@
 ---
 ---Override the default colorscheme by defining the environment variable
 ---`NVIM_COLORSCHEME` using the same format.
-local DEFAULT_COLORSCHEME = "catppuccin dark"
+local DEFAULT_COLORSCHEME = "default_dark"
 
 local Color = Config.common.color.Color
 local utils = Config.common.utils
@@ -17,7 +17,7 @@ local hi, hi_link, hi_clear = hl.hi, hl.hi_link, hl.hi_clear
 
 local M = {}
 
-M.DEFAULT_DARK = "oxocarbon-lua"
+M.DEFAULT_DARK = "gruvbox-material"
 M.DEFAULT_LIGHT = "seoulbones"
 
 do

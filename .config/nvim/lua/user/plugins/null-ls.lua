@@ -18,6 +18,7 @@ return function()
   end
 
   nls.setup({
+    temp_dir = '/tmp',
     sources = {
       diagnostics.ansiblelint,
       diagnostics.markdownlint,

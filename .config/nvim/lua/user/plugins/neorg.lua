@@ -15,7 +15,7 @@ return function()
       ["core.norg.dirman"] = {
         config = {
           workspaces = {
-            uni = "~/Documents/uni/notes",
+            work_notes = "~/Documents/notes",
           },
         },
       },
@@ -26,7 +26,7 @@ return function()
       },
       ['core.gtd.base'] = {
         config = {
-          workspace = 'uni',
+          workspace = 'work_notes',
         },
       },
     },
